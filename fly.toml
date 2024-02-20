@@ -13,7 +13,7 @@ primary_region = 'hkg'
   PORT = '8080'
 
 [[services]]
-  internal_port = 8000
+  internal_port = 8080
   protocol = "tcp"
 
   [services.concurrency]
