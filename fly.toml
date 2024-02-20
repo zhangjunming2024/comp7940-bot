@@ -9,6 +9,9 @@ primary_region = 'hkg'
 [build]
   builder = 'paketobuildpacks/builder:base'
 
+[deploy]
+  release_command = "bin/rails db:prepare"
+
 [env]
   PORT = '8080'
 
