@@ -2,7 +2,7 @@
 ## chatbot.py
 import telegram
 from telegram import Update
-from telegram.ext import (Updater, CommandHandler, MessageHandler, filters, CallbackContext, PrefixHandler)
+from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, CallbackContext, PrefixHandler)
 # The messageHandler is used for all message updates
 import configparser
 import logging
@@ -28,7 +28,7 @@ def main():
 	logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level= logging.INFO)
 	
 	# register a dispatcher to handle message: here we register an echo dispatcher
-	# echo_handler = MessageHandler(filters.text & (~filters.command), echo)
+	# echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
 	# dispatcher.add_handler(echo_handler)
 	
 	# on different commands - answer in Telegram
@@ -37,13 +37,13 @@ def main():
 
 	# lab_4_writeup_question_3, not work the command handler or prefix handler not work with " "
 	# dispatcher.add_handler(CommandHandler("hello Kevin", hello_kevin))
-	# dispatcher.add_handler(MessageHandler(filters.text, hello_kevin))
+	# dispatcher.add_handler(MessageHandler(Filters.text, hello_kevin))
 
 
 	# dispatcher for chatgpt
 	global chatgpt
 	chatgpt = HKBU_ChatGPT(config)
-	chatgpt_handler = MessageHandler(filters.text & (~filters.command),equiped_chatgpt)
+	chatgpt_handler = MessageHandler(Filters.text & (~Filters.command),equiped_chatgpt)
 	dispatcher.add_handler(chatgpt_handler)
 
 	
