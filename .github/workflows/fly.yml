@@ -2,7 +2,7 @@ name: Fly Deploy
 on:
   push:
     branches:
-- main
+	- main
 jobs:
   deploy:
     name: Deploy app
@@ -10,9 +10,8 @@ jobs:
     concurrency: deploy-group
 runs at a time
     steps:
-# change to main if needed
-- uses: actions/checkout@v3
-- uses: superfly/flyctl-actions/setup-flyctl@master
-- run: flyctl deploy --remote-only
-  env:
-    FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+	- uses: actions/checkout@v3
+	- uses: superfly/flyctl-actions/setup-flyctl@master
+	- run: flyctl deploy --remote-only
+  	env:
+    	FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
