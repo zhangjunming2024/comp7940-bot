@@ -1,10 +1,11 @@
 ## this file is based on version 13.7 of python telegram chatbot and version 1.26.18 of u
 ## chatbot.py
 import telegram
+import os
 from telegram import Update
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, CallbackContext, PrefixHandler)
 # The messageHandler is used for all message updates
-import configparser
+# import configparser
 import logging
 
 import redis
@@ -15,14 +16,19 @@ global redis1
 
 def main():
 	# Load your token and create an Updater for your Bot
-	config = configparser.ConfigParser()
-	config.read('config.ini')
-	updater = Updater(token=(config['TELEGRAM']['ACCESS_TOKEN']), use_context=True)
+	# config = configparser.ConfigParser()
+	# config.read('config.ini')
+	# updater = Updater(token=(config['TELEGRAM']['ACCESS_TOKEN']), use_context=True)
+	updater = Updater(token=(os.environ['TLG_ACCESS_TOKEN']), use_context=True)
 	dispatcher = updater.dispatcher
 	global redis1
-	redis1 = redis.Redis(host=(config['REDIS']['HOST']),
-		password=(config['REDIS']['PASSWORD']),
-		port=(config['REDIS']['REDISPORT']))
+	# redis1 = redis.Redis(host=(config['REDIS']['HOST']),
+	# 	password=(config['REDIS']['PASSWORD']),
+	# 	port=(config['REDIS']['REDISPORT']))
+	
+	redis1 = redis.Redis(host=(os.environ['REDIS_HOST']),
+		password=(os.environ['REDIS_PASSWORD']),
+		port=(os.environ['REDIS_REDISPORT']))
 
 	# You can set this logging module, so you will know when and why things do not work a
 	logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level= logging.INFO)
